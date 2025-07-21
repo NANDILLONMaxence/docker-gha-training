@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  myapp:
+    image: myapp:1
+    container_name: myapp_container
+    ports:
+      - "8080:5000"
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://myuser:mypassword@postgres:5432/mydatabase
+    networks:
+      - mynetwork
+
+  postgres:
+    image: postgres:16.3
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - mynetwork
+
+volumes:
+  postgres_data:
+
+networks:
+  mynetwork:
