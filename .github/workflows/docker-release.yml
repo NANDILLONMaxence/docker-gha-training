@@ -27,4 +27,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: madmax/myapp:1
+          tags: madmaxdr/myapp:1
