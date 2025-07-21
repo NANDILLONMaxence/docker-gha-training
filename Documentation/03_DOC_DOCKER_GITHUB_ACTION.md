@@ -175,4 +175,8 @@ git push origin main  # or your working branch
 - The **Docker Release** workflow runs only when pushing to the `main` branch
     
 
+![07_build_and_push.png](Pieces_jointes/07_build_and_push.png)
+
+![08_build_test.png](Pieces_jointes/08_build_test.png)
+
 ---
